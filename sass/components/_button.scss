@@ -1,0 +1,102 @@
+
+.btn{
+	&,
+	&:link,
+	&:visited{
+		text-decoration:none;
+		display:inline-block;//this is very important property for the transition to work properly, the translateY does not work if this is not inline-block/block
+		padding:1.5rem 4rem;
+		text-transform:uppercase;
+		border-radius:10rem;
+		position:relative;
+		animation:moveInBottom 0.4s ease-out 0.75s;
+		animation-fill-mode:backwards;
+		font-size:$default-font-size;
+		transition:all 0.2s;
+		
+		//this is for the button
+		border:none;
+	}
+	//In the case of pseudo-classes, the order does matter. :hover styling will override :active styling, so it must be declared before the :active styling.
+	//it is due to specificity, since when a link is being clicked, it is simultaneously in hover and clicked state
+	//now the order of the source code becomes important and if hover is the last it is applied
+	//so we need to put active pseudo class after the hover pseudo-class
+	&:hover{
+	    transform:translateY(-3px);
+		box-shadow:0 5px 10px rgba($color-black,0.2);
+	
+		&::after{
+			transform: scaleX(1.4) scaleY(1.6);
+			opacity:0;
+		}
+	
+	}
+	
+	&:active{
+	 transform:translateY(-1px);
+	 box-shadow:0 2px 5px rgba($color-black,0.2);
+	}
+	
+	&--white:link,
+	&--white:visited{
+		background-color:$color-white;
+		color:$color-grey-dark;
+		
+		&::after{/*all the after elements of the same parent/element are same(so there can be only one after element), hence if there a multiple classes with after psuedo class, and the classes are on same element then they point ot the same after pseudo:element*/
+			background-color:$color-white;
+		}
+	
+	}
+	
+	&--green,
+	&--green:link,
+	&--green:visited{
+		background-color:$color-primary;
+		color:$color-white;
+		
+		&::after{
+			background-color:$color-primary;
+		}
+	
+	}
+	
+	&::after{
+		content:'';/*very important property without this the after element will not appear on the dom*/
+		width:100%;
+		height:100%;
+		display:inline-block;
+		position:absolute;
+		top:0;
+		left:0;
+		border-radius:10rem;
+		z-index:-1;
+		transition:all 0.4s;
+	}
+	
+}
+
+
+.btn-text{
+ &:link, &:visited{
+	 font-size:$default-font-size;
+	 display:inline-block;
+	 text-decoration:none;
+	 color:$color-primary;
+	 padding:3px;
+	 border-bottom:1px solid $color-primary;
+	 transition: all .2s;
+ }
+ 
+ &:hover{
+   border-bottom:none;
+   color:$color-white;
+   background-color:$color-primary;
+   transform:translateY(-2px);
+   box-shadow:0 1rem 2rem rgba($color-black,.15);
+ }
+ 
+ &:active{
+   transform:translateY(0);
+   box-shadow:0 1rem 1rem rgba($color-black,.15);
+ }
+}

@@ -1,0 +1,88 @@
+body{
+ font-family:Lato, sans-serif;
+ font-weight:400;
+ color:$color-grey-dark;
+ line-height:1.7; 
+}
+
+.heading-primary{
+	color:$color-white;
+	text-transform:uppercase;
+	
+	
+	&--main{
+		font-size:6rem;
+		font-weight:400;/*even though the default font-weight for the body is 400,this is necessary because h1 element has its own font-weight*/
+		display:block;// the display property is important for the animation to work, its value should either be inline-block or block, animation does not work on inline elements
+		letter-spacing:3.5rem;
+		animation: moveInLeft 1s ease-out;
+		
+		@include respond(phone){
+		  letter-spacing:1rem;
+		  font-size:3.5rem;
+		}
+	}
+
+	&--sub{
+		font-size:2rem;
+		font-weight:700;
+		display:block;
+		letter-spacing:1.75rem;
+		animation:moveInRight 1s ease-out;
+		margin-bottom:2rem;
+		
+		@include respond(phone){
+		 letter-spacing:.4rem;
+		 font-size:1.5rem;
+		}
+		
+	}
+}
+
+.heading-secondary{
+  font-size:3.5rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  background-image:linear-gradient(to right, rgba($color-primary-light,0.8),rgba($color-primary-dark,0.8));
+  display:inline-block;
+  -webkit-background-clip:text;
+  background-clip:text;// this is a new property and here it clips the background image to the text so that background image is visible only on the text,cool effect!
+  color:transparent;//the text is made transparent so that the background-image that has been clipped, as per the text, becomes visible
+  transition: all .2s;
+  
+  @include respond(tab-port){
+   font-size:2.5rem;
+  }
+  
+  @include respond(phone){
+   font-size:2rem;
+  }
+  
+  &:hover{
+	 transform: skewY(2deg) skewX(15deg) scale(1.1);
+	 text-shadow: .5rem 1rem .5rem rgba($color-black,0.2);//new property alert!!!
+	 // x direction, y direction, blur ,color => lesser the blur clearer the shadow, greater the y direction, greater away the shadow on the y axis
+	}
+}
+
+
+
+
+.heading-tertiary{
+ font-size:$default-font-size;
+ font-weight:700;
+ color:$color-grey-dark;
+ text-transform:uppercase;
+}
+
+.paragraph{
+ font-size:$default-font-size;
+ color:$color-grey-dark;
+ line-height:1.4;
+ 
+ &:not(:last-child){
+  margin-bottom:2rem;
+ }
+}
+

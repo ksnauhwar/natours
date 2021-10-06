@@ -1,0 +1,47 @@
+
+*,
+*::after,
+*::before{
+	 margin:0;
+	 padding:0;
+	 box-sizing:inherit;
+}
+
+//note that html was not included in the typography.scss even though it sets the font size
+//is becase the font-size is used for rem workflow i.e. responsive design of the page
+//and hence it also controls the size of the boxes/elements on the page and not just the font size
+html{
+	font-size:62.5%;/*root font size is always set on html element*/
+	
+   @include respond(big-desktop){
+    font-size:75%;
+   }
+   
+   @include respond(tab-land){
+    font-size:56.25%;
+   }
+   
+   @include respond(tab-port){
+    font-size:50%;
+   }
+   
+}
+
+
+body{
+ font-family:Lato, sans-serif;
+ font-weight:400;
+ padding:30px;
+ color:$color-grey-dark;
+ box-sizing:border-box;
+ 
+ @include respond(tab-port){
+  padding:0;
+ }
+}
+
+
+::selection{
+ background-color:$color-primary;
+ color:$color-white;
+}

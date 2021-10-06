@@ -1,0 +1,166 @@
+.navigation{
+
+ &__checkbox{	
+ display:none;
+ }
+
+ &__button{
+  width:7.2rem;
+  height:7.2rem;
+  border-radius:50%;
+  position:fixed;
+  top:6rem;
+  right:6rem;
+  background-color:$color-white;
+  z-index:200;
+  box-shadow: 0 1rem 3rem rgba($color-black,0.1);
+  
+  cursor:pointer;
+  text-align:center;
+  
+  @include respond(tab-port){
+   top:3rem;
+   right:3rem;
+  }
+ }
+ 
+ 
+ 
+ &__background{
+  width:6.5rem;
+  height:6.5rem;
+  position:fixed;
+  top:6.5rem;
+  right:6.5rem;
+  background-image:radial-gradient($color-primary-light,$color-primary-dark);//new property alert
+  border-radius:50%;
+  z-index:100;
+  transition:all 0.8s;
+  
+  @include respond(tab-port){
+   top:3.2rem;
+   right:3.2rem;
+  }
+ }
+ 
+ &__checkbox:checked~&__background{
+  transform:scale(80);
+ }
+ 
+ &__nav{
+   height:100vh;
+   z-index:150;
+   text-align:center;
+   position:fixed;
+   top:0;
+   left:0;
+   
+   opacity:0;
+   width:0;//new trick alert:this is to virtually remove the element from the screen
+   transition: all .8s;
+ }
+ 
+ &__checkbox:checked~&__nav{
+  opacity:1;
+  width:100%;
+ }
+ 
+ 
+ 
+ &__list{
+ 
+   @include position-center;
+   list-style:none;
+ }
+ 
+ &__item{
+  margin:1rem;
+ }
+ 
+ //FUNCTIONALITY
+ &__link{
+ 
+ &:link,&:visited{
+	  display:inline-block;
+	  padding: 1rem 2rem;
+	  text-decoration:none;
+	  text-transform:uppercase;
+	  color:$color-white;
+	  font-size:3rem;
+	  font-weight:300;
+	  
+	  
+	  background-image:linear-gradient(120deg,transparent 0%,transparent 50%,$color-white 50%);
+	  background-size:220%;
+	  transition: all .5s;
+	  
+	  span{
+	   margin-right:1.5rem;
+	  }
+  }
+  
+  &:hover,
+  &:active{
+   background-position:100%;
+   color:$color-primary;
+   transform:translateX(1rem);
+  }
+ }
+ 
+ //ICON
+ &__icon{
+  position:relative;
+ margin-top:3.5rem;
+   
+  &,
+  &::after,
+  &::before{
+   width:3rem;
+   height:2px;
+   display:inline-block;
+   background-color:$color-grey-dark-2;
+   
+   transition:all .2s;
+  }
+  
+  &::after,
+  &::before{
+   content:'';
+  }
+  
+  &::before{
+   position:absolute;
+   top:-.8rem;
+   left:0;
+  }
+   
+  &::after{
+   position:absolute;
+   top:.8rem;
+   left:0;
+  }  
+ }
+ 
+ &__button:hover &__icon::before{
+  top:-1rem;
+ }
+ 
+ 
+ &__button:hover &__icon::after{
+  top:1rem;
+ }
+ 
+ &__checkbox:checked + &__button &__icon{
+   background-color:transparent;//another trick for making the element invisible
+   
+   &::before{
+    top:0;
+    transform:rotate(135deg);
+   }
+   
+   &::after{
+	 top:0;
+     transform:rotate(-135deg);
+   }
+ }
+}
